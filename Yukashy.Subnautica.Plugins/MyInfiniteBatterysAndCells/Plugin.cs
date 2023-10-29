@@ -37,7 +37,7 @@ namespace MyInfiniteBatterysAndCells
 
             Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_NAME} is loaded!");
 
-            //CreateInfinityBattery.Register();
+            InfiniteBatteries.Register();
 
         }
     }
