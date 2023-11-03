@@ -7,6 +7,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Utilities", "Utilities\Util
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyInfiniteBatterysAndCells", "MyInfiniteBatterysAndCells\MyInfiniteBatterysAndCells.csproj", "{CCBAE7A5-6D54-4764-B4F7-5A8B4D01DC9F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyReactorRod", "MyReactorRod\MyReactorRod.csproj", "{A8FEC490-A326-4D5B-974C-6A138F871DCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{CCBAE7A5-6D54-4764-B4F7-5A8B4D01DC9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCBAE7A5-6D54-4764-B4F7-5A8B4D01DC9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCBAE7A5-6D54-4764-B4F7-5A8B4D01DC9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8FEC490-A326-4D5B-974C-6A138F871DCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8FEC490-A326-4D5B-974C-6A138F871DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8FEC490-A326-4D5B-974C-6A138F871DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8FEC490-A326-4D5B-974C-6A138F871DCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -25,6 +31,8 @@ Global
 		SolutionGuid = {5A0373A0-612D-451C-831C-D35540BAD183}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Utilities\Utilities.projitems*{a8fec490-a326-4d5b-974c-6a138f871dca}*SharedItemsImports = 5
+		Utilities\Utilities.projitems*{ccbae7a5-6d54-4764-b4f7-5a8b4d01dc9f}*SharedItemsImports = 5
 		Utilities\Utilities.projitems*{f5bc1617-d550-42e3-92d3-81080cff5d8a}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

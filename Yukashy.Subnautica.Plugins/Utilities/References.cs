@@ -1,4 +1,6 @@
-﻿#pragma warning disable IDE1006 // Suppress warnings (convention violation) related to "Naming Styles"
+﻿#if OFF
+
+#pragma warning disable IDE1006 // Suppress warnings (convention violation) related to "Naming Styles"
 
 /*       Microsoft   */
 
@@ -60,3 +62,5 @@ global using static CraftData;
 global using UWE;
 
 /*    SMLHelper.V2   */
+
+#endif

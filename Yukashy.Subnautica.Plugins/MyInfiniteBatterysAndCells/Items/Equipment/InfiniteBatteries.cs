@@ -1,71 +1,95 @@
-﻿#pragma warning disable IDE1006 // Suppress warnings (convention violation) related to "Naming Styles"
-
-using Nautilus.Assets.PrefabTemplates;
+﻿
 using Nautilus.Assets;
+using Nautilus.Assets.Gadgets;
+using Nautilus.Assets.PrefabTemplates;
 using Nautilus.Crafting;
 using System.Collections.Generic;
-using Nautilus.Assets.Gadgets;
-using static CraftData;
+using UnityEngine;
+using static Utilities.Diversos;
+using static VFXParticlesPool;
+using Ingredient = CraftData.Ingredient;
 
 namespace MyInfiniteBatterysAndCells.Items.Equipment
 {
-    public class InfiniteBatteries
+    internal class InfiniteBatteries : CustomPrefab
     {
-
-        public static void Register()
+        public static new void Register() //se der erro retirar o NEW
         {
             #region[Declarations]
-            const string classId = "My Infinite Battery",
-                         displayName = "Infinite Battery",
-                         description = "Powerful battery to make.",
+            const string classId = "MyInfiniteBattery",
+                         displayName = "My Infinite Battery",
+                         description = "A powerful battery of the Gods to make!",
                          language = "English";
-
             const bool unlockAtStart = true;
+
+            Atlas.Sprite sprite = ImageHelper.GetSpriteFromAssetsFolder("InfiniteBattery.png");
             #endregion
 
             PrefabInfo infiniteBatteryInfo = PrefabInfo.WithTechType(
                 classId, displayName, description, language, unlockAtStart, null);
-
-            infiniteBatteryInfo.WithIcon(SpriteManager.Get(TechType.Battery));
-
+            infiniteBatteryInfo.WithIcon(sprite);
             infiniteBatteryInfo.WithSizeInInventory(new Vector2int(1, 1));
 
-            CustomPrefab infiniteBattery = new CustomPrefab(infiniteBatteryInfo);
+            TechType techType = infiniteBatteryInfo.TechType;
 
-            PrefabTemplate infiniteBatteryClone = new CloneTemplate(infiniteBatteryInfo, TechType.Battery)
+            CustomPrefab infiniteBattery = new(infiniteBatteryInfo);
+
+            PrefabTemplate infiniteBatteryClone = new CloneTemplate(infiniteBatteryInfo, TechType.PrecursorIonBattery)
             {
                 ModifyPrefab = go =>
                 {
-                    //BatteryCharger batteryCharger = go.GetComponent<BatteryCharger>();
-                    //BatteryCharger.compatibleTech.Add(TechType.);
+                    //go.SetActive(false);
 
-                    Battery myBattery = go.GetComponent<Battery>();
-                    //myBattery.GetAllComponentsInChildren<Battery>();
-                    myBattery._capacity = 10000f;
+                    //CoroutineTask<GameObject> task = CraftData.GetPrefabForTechTypeAsync(TechType.Battery);
+                    //GameObject originalPrefab = task.GetResult();
 
+                    var energyMixinIdentifier = go.AddComponent<EnergyMixin>();
+                        //energyMixinIdentifier.allowBatteryReplacement = true;
+                        //energyMixinIdentifier.defaultBatteryCharge = 1f;
+                    
+
+
+
+                    Battery myBattery = go.EnsureComponent<Battery>();
+                            myBattery = go.GetComponentInChildren<Battery>(true);
+
+                            myBattery._capacity = 9999f;
+                            myBattery.name = displayName;
+
+                            BatteryCharger.compatibleTech.Add(techType);
+
+                            //if (!compatibleTech.Contains(techType))
+                            //    compatibleTech.Add(techType);
+
+                            go.SetActive(true);
                 }
             };
 
-            //infiniteBattery.SetUnlock(TechType.AcidMushroom);
-            //infiniteBattery.SetUnlock(TechType.None);
 
             infiniteBattery.SetGameObject(infiniteBatteryClone);
 
-            infiniteBattery.SetRecipe(new RecipeData()
+            RecipeData recipe = new()
             {
                 craftAmount = 1,
-
                 Ingredients = new List<Ingredient>()
-            {
+                {
                     new Ingredient(TechType.Titanium, 3),
                     new Ingredient(TechType.AcidMushroom, 5),
                     new Ingredient(TechType.Quartz, 1),
-            }
-            }).WithFabricatorType(CraftTree.Type.Fabricator)
+                },
+            };
 
+            infiniteBattery.SetRecipe(recipe)
+                .WithFabricatorType(CraftTree.Type.Fabricator)
                 .WithStepsToFabricatorTab("Resources", "Electronics")
+                .WithCraftingTime(2f);
 
-                .WithCraftingTime(1f);
+            //infiniteBattery.SetUnlock(TechType.AcidMushroom);
+
+            //CraftDataHandler.SetEquipmentType(TechType.Battery, EquipmentType.BatteryCharger);
+
+            //EnumHandler.AddEntry<EquipmentType>($"{classId}");
+            //EnumHandler.AddEntry<TechType>($"{classId}");
 
             infiniteBattery.SetEquipment(EquipmentType.BatteryCharger).WithQuickSlotType(QuickSlotType.None);
 

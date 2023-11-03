@@ -2,12 +2,14 @@
 
 using Nautilus.Handlers;
 using Nautilus.Options;
+using PC = MyInfiniteBatterysAndCells.MyInfiniteBatterysAndCells;
+using MyInfiniteBatterysAndCells.Items.Equipment;
 
 namespace MyInfiniteBatterysAndCells
 {
     public class PluginConfig : ModOptions
     {
-        public PluginConfig() : base($"{Nautilus.PluginInfo.PLUGIN_GUID} Config")
+        public PluginConfig() : base($"{PC.PLUGIN_GUID} Config")
 
         {
             OptionsPanelHandler.RegisterModOptions(this);
@@ -18,8 +20,6 @@ namespace MyInfiniteBatterysAndCells
             sliderWithChange.OnChanged += specific_OnChanged;
             AddItem(sliderWithChange);
 
-            AddItem(ModSliderOption.Create(id: "Foo", label: "Bar", minValue: 0, maxValue: 100, value: 50));
-            AddItem(ModChoiceOption<string>.Create(id: "Baz", label: "Qux", options: new[] { "ABC", "DEF", "XYZ" }, index: 0));
         }
 
         private void specific_OnChanged(object sender, SliderChangedEventArgs e)
