@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyInfiniteBatterysAndCells"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyReactorRod", "MyReactorRod\MyReactorRod.csproj", "{A8FEC490-A326-4D5B-974C-6A138F871DCA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySeamothModules", "MySeamothModules\MySeamothModules.csproj", "{6E881989-3C26-49B2-8540-3C8798978C33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{A8FEC490-A326-4D5B-974C-6A138F871DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8FEC490-A326-4D5B-974C-6A138F871DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8FEC490-A326-4D5B-974C-6A138F871DCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E881989-3C26-49B2-8540-3C8798978C33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E881989-3C26-49B2-8540-3C8798978C33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E881989-3C26-49B2-8540-3C8798978C33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E881989-3C26-49B2-8540-3C8798978C33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,8 +4,10 @@ using BepInEx.Logging;
 using HarmonyLib;
 using Nautilus.Handlers;
 using Nautilus.Utility;
+using Nautilus.Json;
 using System.Reflection;
 using System.Collections.Generic;
+using Nautilus.Options;
 //using static MyReactorRod.PluginConfig;
 
 namespace MyReactorRod
@@ -21,7 +23,7 @@ namespace MyReactorRod
         private const string PLUGIN_VERSION = "1.0.0";
         #endregion
 
-        internal static MyReactorRodConfig config { get; set; } = OptionsPanelHandler.RegisterModOptions<MyReactorRodConfig>();
+        internal static ModOptions config { get; set; } = OptionsPanelHandler.RegisterModOptions<ModOptions>();
 
         internal static ManualLogSource LogSource { get; private set; }
 

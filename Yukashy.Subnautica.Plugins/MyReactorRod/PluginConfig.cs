@@ -1,22 +1,10 @@
 ﻿#pragma warning disable IDE1006 // Suppress warnings (convention violation) related to "Naming Styles"
 
 using Nautilus.Handlers;
-using Nautilus.Options;
 using Nautilus.Json;
+using Nautilus.Options;
 using Nautilus.Options.Attributes;
 using UnityEngine.UI;
-using BepInEx;
-using BepInEx.Logging;
-using HarmonyLib;
-
-using Nautilus.Utility;
-using System.Reflection;
-using System.Collections.Generic;
-using static MyReactorRod.PluginConfig;
-
-
-
-using MyReactorRod;
 
 namespace MyReactorRod
 {
@@ -44,8 +32,7 @@ namespace MyReactorRod
 
         private void specific_OnChanged(object sender, SliderChangedEventArgs e)
         {
-            public float multiply = 10;
-            //Subtitles.Add("Module activated");
+            //Subtitles.Add("Module activated"); public float multiply = 10;
         }
     }
 }
