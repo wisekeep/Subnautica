@@ -1,102 +1,76 @@
 ﻿
-using Nautilus.Assets;
-using Nautilus.Assets.Gadgets;
-using Nautilus.Assets.PrefabTemplates;
-using Nautilus.Crafting;
-using System.Collections.Generic;
-using UnityEngine;
-using static Utilities.Diversos;
-using static VFXParticlesPool;
-using Ingredient = CraftData.Ingredient;
+using MyInfiniteBatterysAndCells.Patches;
 
 namespace MyInfiniteBatterysAndCells.Items.Equipment
 {
-    internal class InfiniteBatteries : CustomPrefab
+    public static class InfiniteBatteries
     {
-        public static new void Register() //se der erro retirar o NEW
+        #region[Declarations]
+        public static Atlas.Sprite sprite { get; set; }
+        public static Battery battery { get; set; }
+        public static TechType TechType { get; set; }
+        public static PrefabInfo Info { get; set; }
+        public static float batteryEnergy { get; set; } = 10000f;
+
+        public const string classId = "MyInfiniteBattery",
+                            displayName = "My Infinite Battery",
+                            description = "A god powerful battery to make!",
+                            language = "English";
+        public const bool unlockAtStart = true;
+        public static bool wasActive;
+        #endregion
+        public static void Patch()
         {
-            #region[Declarations]
-            const string classId = "MyInfiniteBattery",
-                         displayName = "My Infinite Battery",
-                         description = "A powerful battery of the Gods to make!",
-                         language = "English";
-            const bool unlockAtStart = true;
+            sprite = ImageHelper.GetSpriteFromAssetsFolder("InfiniteBattery.png");
 
-            Atlas.Sprite sprite = ImageHelper.GetSpriteFromAssetsFolder("InfiniteBattery.png");
-            #endregion
+            Info = PrefabInfo
+            .WithTechType(classId, displayName, description, language, unlockAtStart, null)
+            .WithIcon(sprite)
+            .WithSizeInInventory(new Vector2int(1, 1));
 
-            PrefabInfo infiniteBatteryInfo = PrefabInfo.WithTechType(
-                classId, displayName, description, language, unlockAtStart, null);
-            infiniteBatteryInfo.WithIcon(sprite);
-            infiniteBatteryInfo.WithSizeInInventory(new Vector2int(1, 1));
+            TechType = Info.TechType;
 
-            TechType techType = infiniteBatteryInfo.TechType;
+            CustomPrefab InfiniteBattery = new(Info);
 
-            CustomPrefab infiniteBattery = new(infiniteBatteryInfo);
-
-            PrefabTemplate infiniteBatteryClone = new CloneTemplate(infiniteBatteryInfo, TechType.PrecursorIonBattery)
+            PrefabTemplate infiniteBatteryClone = new CloneTemplate(Info, TechType.Battery)
             {
                 ModifyPrefab = go =>
                 {
-                    //go.SetActive(false);
+                    wasActive = go.activeSelf;
+                    if (wasActive) go.SetActive(false);
 
-                    //CoroutineTask<GameObject> task = CraftData.GetPrefabForTechTypeAsync(TechType.Battery);
-                    //GameObject originalPrefab = task.GetResult();
+                    battery = go.EnsureComponent<Battery>();
+                    battery._capacity = batteryEnergy;
 
-                    var energyMixinIdentifier = go.AddComponent<EnergyMixin>();
-                        //energyMixinIdentifier.allowBatteryReplacement = true;
-                        //energyMixinIdentifier.defaultBatteryCharge = 1f;
-                    
-
-
-
-                    Battery myBattery = go.EnsureComponent<Battery>();
-                            myBattery = go.GetComponentInChildren<Battery>(true);
-
-                            myBattery._capacity = 9999f;
-                            myBattery.name = displayName;
-
-                            BatteryCharger.compatibleTech.Add(techType);
-
-                            //if (!compatibleTech.Contains(techType))
-                            //    compatibleTech.Add(techType);
-
-                            go.SetActive(true);
+                    if (wasActive) go.SetActive(true);
                 }
             };
-
-
-            infiniteBattery.SetGameObject(infiniteBatteryClone);
 
             RecipeData recipe = new()
             {
                 craftAmount = 1,
-                Ingredients = new List<Ingredient>()
-                {
-                    new Ingredient(TechType.Titanium, 3),
-                    new Ingredient(TechType.AcidMushroom, 5),
-                    new Ingredient(TechType.Quartz, 1),
-                },
+                Ingredients =
+                        {
+                            new Ingredient(TechType.Titanium, 3),
+                            new Ingredient(TechType.AcidMushroom, 5),
+                            new Ingredient(TechType.Quartz, 1),
+                        },
             };
 
-            infiniteBattery.SetRecipe(recipe)
-                .WithFabricatorType(CraftTree.Type.Fabricator)
-                .WithStepsToFabricatorTab("Resources", "Electronics")
-                .WithCraftingTime(2f);
+            InfiniteBattery.SetRecipe(recipe)
+                            .WithFabricatorType(CraftTree.Type.Fabricator)
+                            .WithStepsToFabricatorTab("Resources", "Electronics")
+                            .WithCraftingTime(2f);
 
             //infiniteBattery.SetUnlock(TechType.AcidMushroom);
 
-            //CraftDataHandler.SetEquipmentType(TechType.Battery, EquipmentType.BatteryCharger);
+            InfiniteBattery.SetEquipment(EquipmentType.BatteryCharger);
 
-            //EnumHandler.AddEntry<EquipmentType>($"{classId}");
-            //EnumHandler.AddEntry<TechType>($"{classId}");
+            InfiniteBattery.SetPdaGroupCategory(TechGroup.Resources, TechCategory.Electronics);
 
-            infiniteBattery.SetEquipment(EquipmentType.BatteryCharger).WithQuickSlotType(QuickSlotType.None);
+            InfiniteBattery.SetGameObject(infiniteBatteryClone);
 
-            infiniteBattery.SetPdaGroupCategory(TechGroup.Resources, TechCategory.Electronics);
-
-            infiniteBattery.Register();
-
+            InfiniteBattery.Register();
         }
     }
 }

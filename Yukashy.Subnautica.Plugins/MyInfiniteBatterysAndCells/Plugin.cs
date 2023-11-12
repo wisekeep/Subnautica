@@ -1,11 +1,5 @@
 ﻿
-using BepInEx;
-using BepInEx.Logging;
-using HarmonyLib;
-using System.Reflection;
 using MyInfiniteBatterysAndCells.Items.Equipment;
-using Utilities;
-using Nautilus.Handlers;
 
 namespace MyInfiniteBatterysAndCells
 {
@@ -16,34 +10,25 @@ namespace MyInfiniteBatterysAndCells
     {
         #region[BepInPlugin]
         public const string PLUGIN_GUID = $"com.yukashy.{PLUGIN_NAME}.ver.{PLUGIN_VERSION}";
-        private const string PLUGIN_NAME = "MyInfiniteBatterysAndCells";
-        private const string PLUGIN_VERSION = "1.0.0";
+        public const string PLUGIN_NAME = "MyInfiniteBatterysAndCells";
+        public const string PLUGIN_VERSION = "1.0.0";
         #endregion
 
-        //internal static ModOptions config { get; } = OptionsPanelHandler.RegisterModOptions<ModOptions>();
+        //internal static  ModOptions config { get; set; } = OptionsPanelHandler.RegisterModOptions<ModOptions>();
+        public static ManualLogSource logger { get; set; }
 
-        public static new ManualLogSource Logger { get; private set; }
-
-        private static Assembly Assembly { get; } = Assembly.GetExecutingAssembly();
-
-        private void Awake()
+        private static readonly Harmony harmony = new(PLUGIN_GUID);
+        public void Awake()
         {
+            harmony.PatchAll();
+            logger = Logger;
+            logger.LogInfo($">> Loading harmony patches for {PLUGIN_GUID}..");
+            logger.LogInfo($"Plugin {PLUGIN_NAME} is loaded!");
 
-            var myCustomEquipmentType = EnumHandler.AddEntry<EquipmentType>("MyInfiniteBatterysAndCells");
+            //PiracyDetector.TryFindPiracy();
 
-            // plugin startup logic
-            Logger = base.Logger;
-
-
-            // register harmony patches, if there are any
-            Harmony.CreateAndPatchAll(Assembly, $"{PLUGIN_GUID}");
-
-            Logger.LogInfo($"Plugin {PLUGIN_GUID} is loaded!");
-
-            PiracyDetector.TryFindPiracy();
-
-            InfiniteBatteries.Register();
-
+            InfiniteBatteries.Patch();
+            InfiniteCells.Patch();
         }
     }
 }
