@@ -1,15 +1,12 @@
 ﻿
-
 namespace MyInfiniteBatterysAndCells.Items.Equipment
 {
-    public static class InfiniteCells
+    public class InfiniteCells
     {
         #region[Declarations]
-        public static Atlas.Sprite sprite { get; set; }
-        public static Battery cells { get; set; }
-        public static TechType TechType { get; set; }
-        public static PrefabInfo Info { get; set; }
-        public static float powercellEnergy { get; set; } = 20000f;
+        public static Atlas.Sprite Sprite { get; } = ImageHelper.GetSpriteFromAssetsFolder("InfiniteCell.png");
+        public static Battery Cells { get; private set; }
+        public static float Powercel_Capacity { get; private set; } = 2000f;
 
         public const string classId = "MyInfiniteCells",
                             displayName = "My Infinite Cell",
@@ -18,58 +15,62 @@ namespace MyInfiniteBatterysAndCells.Items.Equipment
         public const bool unlockAtStart = true;
         public static bool wasActive;
         #endregion
+
+        #region[Prefab Declarations]
+        public static PrefabInfo Info { get; private set; } = PrefabInfo
+            .WithTechType(classId, displayName, description, language, unlockAtStart, null)
+            .WithIcon(Sprite)
+            .WithSizeInInventory(new Vector2int(1, 1));
+        public static TechType TechTypeID { get; private set; }
+        public static CustomPrefab InfiniteCell { get; private set; }
+        public static PrefabTemplate InfiniteCellClone { get; private set; }
+        public static RecipeData Recipe { get; private set; }
+        #endregion
         public static void Patch()
         {
-            sprite = ImageHelper.GetSpriteFromAssetsFolder("InfiniteCell.png");
+            TechTypeID = Info.TechType;
 
-            Info = PrefabInfo
-            .WithTechType(classId, displayName, description, language, unlockAtStart, null)
-            .WithIcon(sprite)
-            .WithSizeInInventory(new Vector2int(1, 1));
+            InfiniteCell = new(Info);
 
-            TechType = Info.TechType;
-
-            CustomPrefab InfiniteCells = new(Info);
-
-            PrefabTemplate InfiniteCellsClone = new CloneTemplate(Info, TechType.PowerCell)
+            InfiniteCellClone = new CloneTemplate(Info, TechType.PowerCell)
             {
                 ModifyPrefab = go =>
                 {
                     wasActive = go.activeSelf;
                     if (wasActive) go.SetActive(false);
 
-                    cells = go.EnsureComponent<Battery>();
-                    cells._capacity = powercellEnergy;
+                    Cells = go.EnsureComponent<Battery>();
+                    Cells._capacity = Powercel_Capacity;
 
                     if (wasActive) go.SetActive(true);
                 }
             };
 
-            RecipeData recipe = new()
+            Recipe = new()
             {
                 craftAmount = 1,
                 Ingredients =
                         {
                             new Ingredient(TechType.Silicone, 1),
                             new Ingredient(TechType.Quartz, 1),
-                            new Ingredient(InfiniteBatteries.TechType, 2),
+                            new Ingredient(InfiniteBatteries.TechTypeID, 2),
                         },
             };
 
-            InfiniteCells.SetRecipe(recipe)
+            InfiniteCell.SetRecipe(Recipe)
                             .WithFabricatorType(CraftTree.Type.Fabricator)
                             .WithStepsToFabricatorTab("Resources", "Electronics")
-                            .WithCraftingTime(1f);
+                            .WithCraftingTime(2f);
 
             //infiniteBattery.SetUnlock(TechType.AcidMushroom);
 
-            InfiniteCells.SetEquipment(EquipmentType.PowerCellCharger);
+            InfiniteCell.SetEquipment(EquipmentType.PowerCellCharger);
 
-            InfiniteCells.SetPdaGroupCategory(TechGroup.Resources, TechCategory.Electronics);
+            InfiniteCell.SetPdaGroupCategory(TechGroup.Resources, TechCategory.Electronics);
 
-            InfiniteCells.SetGameObject(InfiniteCellsClone);
+            InfiniteCell.SetGameObject(InfiniteCellClone);
 
-            InfiniteCells.Register();
+            InfiniteCell.Register();
         }
     }
 }

@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyInfiniteBatterysAndCells"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyReactorRod", "MyReactorRod\MyReactorRod.csproj", "{A8FEC490-A326-4D5B-974C-6A138F871DCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySeamothModules", "MySeamothModules\MySeamothModules.csproj", "{6E881989-3C26-49B2-8540-3C8798978C33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySeamothModules", "MySeamothModules\MySeamothModules.csproj", "{6E881989-3C26-49B2-8540-3C8798978C33}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "HootLib", "..\HootLib-Subnautica\HootLib\HootLib.shproj", "{A1EF0757-EDA8-41DC-89D4-C41D81427D00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,7 @@ Global
 		SolutionGuid = {5A0373A0-612D-451C-831C-D35540BAD183}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\HootLib-Subnautica\HootLib\HootLib.projitems*{a1ef0757-eda8-41dc-89d4-c41d81427d00}*SharedItemsImports = 13
 		Utilities\Utilities.projitems*{a8fec490-a326-4d5b-974c-6a138f871dca}*SharedItemsImports = 5
 		Utilities\Utilities.projitems*{ccbae7a5-6d54-4764-b4f7-5a8b4d01dc9f}*SharedItemsImports = 5
 		Utilities\Utilities.projitems*{f5bc1617-d550-42e3-92d3-81080cff5d8a}*SharedItemsImports = 13

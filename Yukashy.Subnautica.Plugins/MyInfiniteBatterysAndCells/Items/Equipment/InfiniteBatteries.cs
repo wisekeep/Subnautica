@@ -1,16 +1,12 @@
 ﻿
-using MyInfiniteBatterysAndCells.Patches;
-
 namespace MyInfiniteBatterysAndCells.Items.Equipment
 {
-    public static class InfiniteBatteries
+    public class InfiniteBatteries
     {
         #region[Declarations]
-        public static Atlas.Sprite sprite { get; set; }
-        public static Battery battery { get; set; }
-        public static TechType TechType { get; set; }
-        public static PrefabInfo Info { get; set; }
-        public static float batteryEnergy { get; set; } = 10000f;
+        public static Atlas.Sprite Sprite { get; } = ImageHelper.GetSpriteFromAssetsFolder("InfiniteBattery.png");
+        public static Battery Battery { get; private set; }
+        public static float Battery_Capacity { get; private set; } = 1000f;
 
         public const string classId = "MyInfiniteBattery",
                             displayName = "My Infinite Battery",
@@ -19,34 +15,39 @@ namespace MyInfiniteBatterysAndCells.Items.Equipment
         public const bool unlockAtStart = true;
         public static bool wasActive;
         #endregion
+
+        #region[Prefab Declarations]
+        public static PrefabInfo Info { get; private set; } = PrefabInfo
+            .WithTechType(classId, displayName, description, language, unlockAtStart, null)
+            .WithIcon(Sprite)
+            .WithSizeInInventory(new Vector2int(1, 1));
+        public static TechType TechTypeID { get; private set; }
+        public static CustomPrefab InfiniteBattery { get; private set; }
+        public static PrefabTemplate InfiniteBatteryClone { get; private set; }
+        public static RecipeData Recipe { get; private set; }
+        #endregion
+
         public static void Patch()
         {
-            sprite = ImageHelper.GetSpriteFromAssetsFolder("InfiniteBattery.png");
+            TechTypeID = Info.TechType;
 
-            Info = PrefabInfo
-            .WithTechType(classId, displayName, description, language, unlockAtStart, null)
-            .WithIcon(sprite)
-            .WithSizeInInventory(new Vector2int(1, 1));
+            InfiniteBattery = new(Info);
 
-            TechType = Info.TechType;
-
-            CustomPrefab InfiniteBattery = new(Info);
-
-            PrefabTemplate infiniteBatteryClone = new CloneTemplate(Info, TechType.Battery)
+            InfiniteBatteryClone = new CloneTemplate(Info, TechType.Battery)
             {
                 ModifyPrefab = go =>
                 {
                     wasActive = go.activeSelf;
                     if (wasActive) go.SetActive(false);
 
-                    battery = go.EnsureComponent<Battery>();
-                    battery._capacity = batteryEnergy;
+                    Battery = go.EnsureComponent<Battery>();
+                    Battery._capacity = Battery_Capacity;
 
                     if (wasActive) go.SetActive(true);
                 }
             };
 
-            RecipeData recipe = new()
+            Recipe = new()
             {
                 craftAmount = 1,
                 Ingredients =
@@ -57,18 +58,18 @@ namespace MyInfiniteBatterysAndCells.Items.Equipment
                         },
             };
 
-            InfiniteBattery.SetRecipe(recipe)
+            InfiniteBattery.SetRecipe(Recipe)
                             .WithFabricatorType(CraftTree.Type.Fabricator)
                             .WithStepsToFabricatorTab("Resources", "Electronics")
                             .WithCraftingTime(2f);
 
-            //infiniteBattery.SetUnlock(TechType.AcidMushroom);
+            //InfiniteBattery.SetUnlock(TechType.AcidMushroom);
 
             InfiniteBattery.SetEquipment(EquipmentType.BatteryCharger);
 
             InfiniteBattery.SetPdaGroupCategory(TechGroup.Resources, TechCategory.Electronics);
 
-            InfiniteBattery.SetGameObject(infiniteBatteryClone);
+            InfiniteBattery.SetGameObject(InfiniteBatteryClone);
 
             InfiniteBattery.Register();
         }

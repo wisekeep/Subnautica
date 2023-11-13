@@ -378,6 +378,7 @@ FodyWeavers.xsd
 
 # VS Code files for those working on multiple tools
 .vscode/*
+.vsconfig/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -400,3 +401,4 @@ FodyWeavers.xsd
 #  /*        Other      */
 Notes.txt
 temp/
+Yukashy.Subnautica.Plugins/.vsconfig
