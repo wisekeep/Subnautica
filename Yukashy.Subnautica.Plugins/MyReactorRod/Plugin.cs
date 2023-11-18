@@ -1,16 +1,4 @@
-﻿
-using BepInEx;
-using BepInEx.Logging;
-using HarmonyLib;
-using Nautilus.Handlers;
-using Nautilus.Utility;
-using Nautilus.Json;
-using System.Reflection;
-using System.Collections.Generic;
-using Nautilus.Options;
-//using static MyReactorRod.PluginConfig;
-
-namespace MyReactorRod
+﻿namespace MyReactorRod
 {
     [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)]
     [BepInDependency("com.snmodding.nautilus")]
@@ -23,18 +11,14 @@ namespace MyReactorRod
         private const string PLUGIN_VERSION = "1.0.0";
         #endregion
 
-        internal static ModOptions config { get; set; } = OptionsPanelHandler.RegisterModOptions<ModOptions>();
-
+        internal static PluginConfig MyConfig { get; set; } = OptionsPanelHandler.RegisterModOptions<PluginConfig>();
         internal static ManualLogSource LogSource { get; private set; }
-
-        public new static ManualLogSource Logger { get; private set; }
-
         private static Assembly Assembly { get; } = Assembly.GetExecutingAssembly();
 
         private void Awake()
         {
             // plugin startup logic
-            Logger = base.Logger;
+            LogSource = Logger;
 
             // register harmony patches, if there are any
             Harmony.CreateAndPatchAll(Assembly, $"{PLUGIN_GUID}");
@@ -52,7 +36,7 @@ namespace MyReactorRod
             {
                 if (chargeDict.TryGetValue(TechType.ReactorRod, out float oldValue))
                 {
-                    float mySet = config.multiply;
+                    float mySet = MyConfig.multiply;
                     float newValue = (oldValue * mySet);
 
                     chargeDict[TechType.ReactorRod] = (float)newValue;
@@ -71,7 +55,7 @@ namespace MyReactorRod
                 LogSource.LogError($"Plugin {PLUGIN_NAME} has FAILED loading. Could not access private static field 'charge' of class BaseNuclearReactor.");
             }
 
-            SaveUtils.RegisterOnSaveEvent(config.Save);
+            SaveUtils.RegisterOnSaveEvent(MyConfig.Save);
         }
     }
 }

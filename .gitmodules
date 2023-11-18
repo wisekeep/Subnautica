@@ -1,3 +1,6 @@
 [submodule "HootLib-Subnautica"]
 	path = HootLib-Subnautica
 	url = https://github.com/tinyhoot/HootLib-Subnautica.git
+[submodule "MyReactorRod"]
+	path = MyReactorRod
+	url = https://github.com/wisekeep/Subnautica.git
