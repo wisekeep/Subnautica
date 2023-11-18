@@ -23,10 +23,8 @@ namespace MySeamothModules
         private const string PLUGIN_VERSION = "1.0.0";
         #endregion
 
-        internal static PluginConfig config { get; set; } = OptionsPanelHandler.RegisterModOptions<PluginConfig>();
-
+        internal static PluginConfig MyConfig { get; private set; } = OptionsPanelHandler.RegisterModOptions<PluginConfig>();
         public static ManualLogSource LogSource { get; private set; }
-
         private static Assembly Assembly { get; } = Assembly.GetExecutingAssembly();
 
         private void Awake()
@@ -45,7 +43,7 @@ namespace MySeamothModules
             SeamothMK4.Register();
             SeamothMK5.Register();
 
-            SaveUtils.RegisterOnSaveEvent(config.Save);
+            SaveUtils.RegisterOnSaveEvent(MyConfig.Save);
         }
 
         [Menu("")]
