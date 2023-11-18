@@ -10,16 +10,16 @@ namespace MyInfiniteBatterysAndCells.Patches
         public static void Start(EnergyMixin __instance)
         {
             if (__instance.compatibleBatteries.Contains(TechType.Battery))
-                __instance.compatibleBatteries.Add(InfiniteBatteries.TechTypeID);
+                __instance.compatibleBatteries.Add(InfiniteBatteries.TechType);
 
             if (__instance.compatibleBatteries.Contains(TechType.PowerCell))
-                __instance.compatibleBatteries.Add(InfiniteCells.TechTypeID);
+                __instance.compatibleBatteries.Add(InfiniteCells.TechType);
         }
 
         [HarmonyPatch(typeof(EnergyMixin), nameof(EnergyMixin.NotifyHasBattery)), HarmonyPostfix]
         public static void NotifyHasBattery(ref EnergyMixin __instance, InventoryItem item)
         {
-            List<TechType> InfiniteCells = new() { Items.Equipment.InfiniteCells.TechTypeID };
+            List<TechType> InfiniteCells = new() { Items.Equipment.InfiniteCells.TechType };
 
             if (InfiniteCells.Count == 0) return;
 

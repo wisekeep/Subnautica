@@ -5,8 +5,8 @@
 
 /*      BepInEx      */
 global using BepInEx;
-//global using BepInEx.Configuration;
 global using BepInEx.Logging;
+//global using BepInEx.Configuration;
 global using BepInEx.AssemblyPublicizer;
 
 /*      Harmony      */
@@ -44,29 +44,31 @@ global using System.Reflection;
 global using System.Reflection.Emit;
 global using System.Linq;
 global using System.IO;
+global using System.Drawing;
 global using System.Diagnostics;
 global using System.Collections;
 global using System.Collections.Generic;
 
 /*       Unity       */
+global using UnityEngineInternal;
 global using UnityEngine;
 global using UnityEngine.UI;
+global using UnityEngine.Scripting;
+global using UnityEngine.SceneManagement;
+global using UnityEngine.Internal;
+global using UnityEngine.Bindings;
 global using UnityEngine.Animations;
 global using UnityEngine.AddressableAssets;
-global using UnityEngine.Bindings;
-global using UnityEngine.Internal;
-global using UnityEngine.SceneManagement;
-global using UnityEngine.Scripting;
-global using UnityEngineInternal;
+global using Unity.Properties;
 
 /*        Other      */
-global using FMOD;
-global using static CraftData;
-global using static Utilities.Diversos;
-global using Ingredient = CraftData.Ingredient;
 global using UWE;
 global using TMPro;
+global using static VFXParticlesPool;
+global using static Utilities.Diversos;
+global using static CraftData;
+global using static Charger;
 global using Newtonsoft.Json;
 global using Newtonsoft.Json.Linq;
-global using static VFXParticlesPool;
-global using static Charger;
+global using Ingredient = CraftData.Ingredient;
+global using FMOD;
