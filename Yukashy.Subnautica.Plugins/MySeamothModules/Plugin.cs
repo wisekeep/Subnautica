@@ -32,7 +32,7 @@ namespace MySeamothModules
             LogSource = base.Logger;
 
             Harmony.CreateAndPatchAll(Assembly, $"{PLUGIN_GUID}");
-            Logger.LogInfo($"Plugin {PLUGIN_GUID} is loaded!");
+            LogSource.LogInfo($"Plugin {PLUGIN_GUID} is loaded!");
 
             InitializePrefabs();
 

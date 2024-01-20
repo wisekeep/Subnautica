@@ -53,7 +53,7 @@ namespace MyInfiniteBatterysAndCells.Items.Equipment
                         {
                             new Ingredient(TechType.Silicone, 1),
                             new Ingredient(TechType.Quartz, 1),
-                            new Ingredient(InfiniteBatteries.TechType, 2),
+                            new Ingredient(InfiniteBatteries.Info.TechType, 2),
                         },
             };
 

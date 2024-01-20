@@ -59,7 +59,8 @@ global using UnityEngine.Internal;
 global using UnityEngine.Bindings;
 global using UnityEngine.Animations;
 global using UnityEngine.AddressableAssets;
-global using Unity.Properties;
+//global using Unity.Properties;
+global using Unity;
 
 /*        Other      */
 global using UWE;

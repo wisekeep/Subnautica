@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net481</TargetFramework>
     <AssemblyName>MyInfiniteBatterysAndCells</AssemblyName>
     <Version>1.0.0</Version>
     <LangVersion>11</LangVersion>
@@ -41,10 +41,11 @@
     </PackageReference>
     <PackageReference Include="BepInEx.Core" Version="5.4.21" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.0" />
-    <PackageReference Include="Subnautica.Nautilus" Version="1.0.0-pre.22" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Subnautica.Nautilus" Version="1.0.0-pre.28" />
     <PackageReference Include="UnityEngine.Modules" Version="2023.1.20" IncludeAssets="compile" />
     <PackageReference Include="Subnautica.GameLibs" Version="71288.0.0-r.0" />
-    <PackageReference Include="PolySharp" Version="1.13.2">
+    <PackageReference Include="PolySharp" Version="1.14.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

@@ -11,9 +11,14 @@ namespace MyInfiniteBatterysAndCells.Patches
         {
             if (__instance.compatibleBatteries.Contains(TechType.Battery))
                 __instance.compatibleBatteries.Add(InfiniteBatteries.TechType);
+            __instance.allowBatteryReplacement = true;
+            __instance.allowedToPlaySounds = true;
+
 
             if (__instance.compatibleBatteries.Contains(TechType.PowerCell))
                 __instance.compatibleBatteries.Add(InfiniteCells.TechType);
+            __instance.allowBatteryReplacement = true;
+            __instance.allowedToPlaySounds = true;
         }
 
         [HarmonyPatch(typeof(EnergyMixin), nameof(EnergyMixin.NotifyHasBattery)), HarmonyPostfix]
