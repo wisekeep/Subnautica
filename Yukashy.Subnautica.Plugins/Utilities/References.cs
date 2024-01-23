@@ -45,6 +45,8 @@ global using System.Reflection.Emit;
 global using System.Linq;
 global using System.IO;
 global using System.Drawing;
+global using System.Drawing.Imaging;
+global using System.Resources;
 global using System.Diagnostics;
 global using System.Collections;
 global using System.Collections.Generic;
@@ -59,6 +61,7 @@ global using UnityEngine.Internal;
 global using UnityEngine.Bindings;
 global using UnityEngine.Animations;
 global using UnityEngine.AddressableAssets;
+global using UnityEngine.Rendering;
 //global using Unity.Properties;
 global using Unity;
 

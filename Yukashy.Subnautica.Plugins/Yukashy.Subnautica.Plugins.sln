@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyReactorRod", "MyReactorRo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySeamothModules", "MySeamothModules\MySeamothModules.csproj", "{6E881989-3C26-49B2-8540-3C8798978C33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeamothModules", "SeamothModules\SeamothModules.csproj", "{3C02AA33-238B-4722-8DD4-8899658CCED1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeamothModules", "SeamothModules\SeamothModules.csproj", "{3C02AA33-238B-4722-8DD4-8899658CCED1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuclearBatteries", "NuclearBatteries\NuclearBatteries.csproj", "{6A5BC22E-0883-43B1-A64C-453BD3FEAE5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuclearBatteries", "NuclearBatteries\NuclearBatteries.csproj", "{6A5BC22E-0883-43B1-A64C-453BD3FEAE5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

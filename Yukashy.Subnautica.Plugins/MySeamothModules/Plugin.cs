@@ -1,15 +1,4 @@
-﻿using BepInEx;
-using BepInEx.Logging;
-using HarmonyLib;
-using MySeamothModules.Items.Equipment.DepthModules;
-using Nautilus.Handlers;
-using Nautilus.Json;
-using Nautilus.Options.Attributes;
-using Nautilus.Utility;
-using System.Reflection;
-using UnityEngine.UI;
-
-
+﻿
 namespace MySeamothModules
 {
     [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)]

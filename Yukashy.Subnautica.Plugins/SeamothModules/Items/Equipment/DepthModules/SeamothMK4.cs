@@ -23,8 +23,6 @@ namespace SeamothModules.Items.Equipment.DepthModules
         public static RecipeData Recipe { get; private set; }
         #endregion
 
-
-
         public static void Register()
         {
             TechType = Info.TechType;

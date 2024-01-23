@@ -2,13 +2,12 @@
 #pragma warning disable IDE0051 // Remove unused private members
 
 using SeamothModules.Items.Equipment.DepthModules;
-using static OVRHaptics;
 
 namespace SeamothModules
 {
-    //[BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)]
-    [BepInDependency("com.snmodding.nautilus")]
+    [BepInDependency(Nautilus.PluginInfo.PLUGIN_GUID, Nautilus.PluginInfo.PLUGIN_VERSION)]
+    //[BepInDependency("com.snmodding.nautilus", BepInDependency.DependencyFlags.HardDependency)]
     [BepInProcess("Subnautica.exe")]
     public class Plugin : BaseUnityPlugin
     {
@@ -26,7 +25,7 @@ namespace SeamothModules
         private void Awake()
         {
             // plugin startup logic
-            LogSource = base.Logger;
+            LogSource = Logger;
 
             InitializePrefabs();
 
