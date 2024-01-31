@@ -1,5 +1,5 @@
 ﻿
-using static Utilities.Images;
+using static NuclearBatteries.Items.GlobalTexture;
 
 namespace NuclearBatteries.Items.Equipment
 {

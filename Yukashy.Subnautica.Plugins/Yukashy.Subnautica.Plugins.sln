@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeamothModules", "SeamothMo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuclearBatteries", "NuclearBatteries\NuclearBatteries.csproj", "{6A5BC22E-0883-43B1-A64C-453BD3FEAE5E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SN2", "SN2", "{8D1EFCB2-D0F8-4886-A32F-34803DD2E954}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BZ1", "BZ1", "{1380EBE5-F07F-4D96-8BB9-B367771FE4B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +48,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CCBAE7A5-6D54-4764-B4F7-5A8B4D01DC9F} = {8D1EFCB2-D0F8-4886-A32F-34803DD2E954}
+		{A8FEC490-A326-4D5B-974C-6A138F871DCA} = {8D1EFCB2-D0F8-4886-A32F-34803DD2E954}
+		{6E881989-3C26-49B2-8540-3C8798978C33} = {8D1EFCB2-D0F8-4886-A32F-34803DD2E954}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5A0373A0-612D-451C-831C-D35540BAD183}

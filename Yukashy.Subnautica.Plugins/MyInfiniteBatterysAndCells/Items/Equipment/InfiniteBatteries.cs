@@ -24,6 +24,7 @@ namespace MyInfiniteBatterysAndCells.Items.Equipment
         public static CustomPrefab InfiniteBattery { get; private set; }
         public static PrefabTemplate InfiniteBatteryClone { get; private set; }
         public static RecipeData Recipe { get; private set; }
+        public static MeshRenderer Renderer { get; private set; }
         #endregion
 
         public static void Patch()
@@ -41,6 +42,10 @@ namespace MyInfiniteBatterysAndCells.Items.Equipment
 
                     Battery = go.EnsureComponent<Battery>();
                     Battery._capacity = MyInfiniteBatterysAndCells.MyConfig.configBatteryEnergy;
+
+                    Renderer = go.GetComponentInChildren<MeshRenderer>(true);
+                    Renderer.material.SetTexture(ShaderPropertyID._MainTex, B_TE);
+                    Renderer.material.SetTexture(ShaderPropertyID._Illum, B_IL);
 
                     if (wasActive) go.SetActive(true);
                 }
