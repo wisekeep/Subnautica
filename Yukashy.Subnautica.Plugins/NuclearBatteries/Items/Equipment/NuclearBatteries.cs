@@ -1,4 +1,4 @@
-﻿
+
 using static NuclearBatteries.Items.GlobalTexture;
 
 namespace NuclearBatteries.Items.Equipment
@@ -16,21 +16,16 @@ namespace NuclearBatteries.Items.Equipment
         public const float NuclearPower = 10000f;
         #endregion
 
-        #region[Prefab IMGs]
-        public static Atlas.Sprite NuclearBatteryIcon { get; } = ImageHelper.GetSpriteFromAssetsFolder("NuclearBattery.png");
-        public static Atlas.Sprite NuclearCellIcon { get; } = ImageHelper.GetSpriteFromAssetsFolder("NuclearCell.png");
-        #endregion
-
         #region[Prefab Declarations]
-        public static PrefabInfo Info { get; } = PrefabInfo
+        public static PrefabInfo Info => PrefabInfo
             .WithTechType(classId, displayName, description, language, unlockAtStart, null)
             .WithIcon(NuclearBatteryIcon)
             .WithSizeInInventory(new Vector2int(1, 1));
-        public static TechType TechType { get; private set; }
-        public static CustomPrefab NuclearBattery { get; private set; }
-        public static PrefabTemplate NuclearBatteryClone { get; private set; }
-        public static RecipeData Recipe { get; private set; }
-        public static MeshRenderer Renderer { get; private set; }
+        public static TechType TechType;
+        public static CustomPrefab NuclearBattery;
+        public static PrefabTemplate NuclearBatteryClone;
+        public static RecipeData Recipe;
+        public static MeshRenderer Renderer;
         #endregion
 
         public static void Patch()
@@ -39,7 +34,7 @@ namespace NuclearBatteries.Items.Equipment
 
             NuclearBattery = new(Info);
 
-            NuclearBatteryClone = new CloneTemplate(Info, TechType.Battery)
+            NuclearBatteryClone = new CloneTemplate(Info, TechType.PrecursorIonBattery)
             {
                 ModifyPrefab = go =>
                 {

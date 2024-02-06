@@ -1,12 +1,12 @@
-﻿using static Utilities.Images;
+using static Utilities.Images;
 
 namespace NuclearBatteries.Items
 {
     internal class GlobalTexture
     {
         //Sprite
-        public static Atlas.Sprite Sprite_Cell => ImageHelper.GetSpriteFromAssetsFolder("NuclearBattery.png");
-        public static Atlas.Sprite Sprite_Battery => ImageHelper.GetSpriteFromAssetsFolder("NuclearCell.png");
+        public static Atlas.Sprite NuclearBatteryIcon => ImageHelper.GetSpriteFromAssetsFolder("NuclearBattery.png");
+        public static Atlas.Sprite NuclearCellIcon => ImageHelper.GetSpriteFromAssetsFolder("NuclearCell.png");
 
         //Nuclear Batteries Texture2D
         public static Texture2D B_TE => GetTexture("NuclearBattery_tex");
