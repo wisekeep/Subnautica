@@ -5,7 +5,8 @@ namespace NuclearBatteries
 {
     [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)]
     [BepInDependency(Nautilus.PluginInfo.PLUGIN_GUID, Nautilus.PluginInfo.PLUGIN_VERSION)]
-    //[BepInDependency("com.snmodding.nautilus", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("com.snmodding.nautilus", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInIncompatibility("com.ahk1221.smlhelper")]
     [BepInProcess("Subnautica.exe")]
     public class Plugin : BaseUnityPlugin
     {
@@ -15,9 +16,9 @@ namespace NuclearBatteries
         private const string PLUGIN_VERSION = "1.0.0";
         #endregion
 
-        public static ManualLogSource LogSource { get; private set; }
+        public static ManualLogSource LogSource;
 
-        private static Assembly Assembly { get; } = Assembly.GetExecutingAssembly();
+        private static Assembly Assembly => Assembly.GetExecutingAssembly();
 
         private void Awake()
         {
@@ -27,6 +28,9 @@ namespace NuclearBatteries
             // register harmony patches, if there are any
             Harmony.CreateAndPatchAll(Assembly, $"{PLUGIN_GUID}");
             LogSource.LogInfo($"Plugin {PLUGIN_GUID} is loaded!");
+
+            Items.Equipment.NuclearBatteries.Patch();
+            Items.Equipment.NuclearCells.Patch();
         }
     }
 }

@@ -2,7 +2,11 @@
 
 namespace NuclearBatteries.Items.Equipment
 {
-    internal class NuclearCells
+    public static class NuclearCells
     {
+        public static void Patch()
+        {
+            //
+        }
     }
 }

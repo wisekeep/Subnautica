@@ -3,7 +3,7 @@ using static NuclearBatteries.Items.GlobalTexture;
 
 namespace NuclearBatteries.Items.Equipment
 {
-    internal class NuclearBatteries
+    public static class NuclearBatteries
     {
         #region[Declarations]
         public static Battery Battery { get; private set; }
@@ -17,7 +17,7 @@ namespace NuclearBatteries.Items.Equipment
         #endregion
 
         #region[Prefab Declarations]
-        public static PrefabInfo Info => PrefabInfo
+        public static PrefabInfo Info { get; private set; } = PrefabInfo
             .WithTechType(classId, displayName, description, language, unlockAtStart, null)
             .WithIcon(NuclearBatteryIcon)
             .WithSizeInInventory(new Vector2int(1, 1));
@@ -43,6 +43,8 @@ namespace NuclearBatteries.Items.Equipment
 
                     Battery = go.EnsureComponent<Battery>();
                     Battery._capacity = NuclearPower;
+                    if (Battery != null)
+                        Battery.charge = Battery.capacity;
 
                     Renderer = go.GetComponentInChildren<MeshRenderer>(true);
                     Renderer.material.SetTexture(ShaderPropertyID._MainTex, B_TE);
@@ -68,7 +70,7 @@ namespace NuclearBatteries.Items.Equipment
                 .WithStepsToFabricatorTab("Resources", "Electronics")
                 .WithCraftingTime(1f);
 
-            //_ = NuclearBattery.SetUnlock(TechType.AcidMushroom);
+            _ = NuclearBattery.SetUnlock(TechType.UraniniteCrystal);
 
             _ = NuclearBattery.SetEquipment(EquipmentType.BatteryCharger);
 
