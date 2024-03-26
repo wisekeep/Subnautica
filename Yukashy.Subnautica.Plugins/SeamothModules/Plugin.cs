@@ -34,7 +34,7 @@ namespace SeamothModules
             LogSource.LogInfo($"Plugin {PLUGIN_GUID} is loaded!");
         }
 
-        private void InitializePrefabs()
+        private static void InitializePrefabs()
         {
             SeamothMK4.Register();
             SeamothMK5.Register();

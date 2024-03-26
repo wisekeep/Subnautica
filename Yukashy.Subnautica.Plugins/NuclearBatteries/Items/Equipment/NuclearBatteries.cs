@@ -1,84 +1,81 @@
-
 using static NuclearBatteries.Items.GlobalTexture;
 
-namespace NuclearBatteries.Items.Equipment
+namespace NuclearBatteries.Items.Equipment;
+
+public static class NuclearBatteries
 {
-    public static class NuclearBatteries
+    public static void Patch()
     {
-        #region[Declarations]
-        public static Battery Battery { get; private set; }
+        Info = PrefabInfo
+            .WithTechType(ClassId, DisplayName, Description, Language, UnlockAtStart)
+            .WithSizeInInventory(new Vector2int(1, 1))
+            .WithIcon(NuclearBatteryIcon);
 
-        public const string classId = "NuclearBattery",
-                            displayName = "My Nuclear Battery",
-                            description = "A Nuclear powerful battery!",
-                            language = "English";
-        public const bool unlockAtStart = true;
-        public const float NuclearPower = 10000f;
-        #endregion
-
-        #region[Prefab Declarations]
-        public static PrefabInfo Info { get; private set; } = PrefabInfo
-            .WithTechType(classId, displayName, description, language, unlockAtStart, null)
-            .WithIcon(NuclearBatteryIcon)
-            .WithSizeInInventory(new Vector2int(1, 1));
-        public static TechType TechType;
-        public static CustomPrefab NuclearBattery;
-        public static PrefabTemplate NuclearBatteryClone;
-        public static RecipeData Recipe;
-        public static MeshRenderer Renderer;
-        #endregion
-
-        public static void Patch()
+        _nuclearBatteryPrefab = new CustomPrefab(Info);
+        _nuclearBatteryClone = new CloneTemplate(Info, TechType.ReactorRod)
         {
-            TechType = Info.TechType;
-
-            NuclearBattery = new(Info);
-
-            NuclearBatteryClone = new CloneTemplate(Info, TechType.PrecursorIonBattery)
+            ModifyPrefab = go =>
             {
-                ModifyPrefab = go =>
-                {
-                    bool wasActive = go.activeSelf;
-                    if (wasActive) go.SetActive(false);
+                var wasActive = go.activeSelf;
+                if (wasActive) go.SetActive(false);
+                _battery = go.EnsureComponent<Battery>();
+                _battery.GetComponentInChildren<Battery>(true);
+                _battery._capacity = NuclearPowerBattery;
+                if (_battery != null)
+                    _battery.charge = _battery.capacity;
 
-                    Battery = go.EnsureComponent<Battery>();
-                    Battery._capacity = NuclearPower;
-                    if (Battery != null)
-                        Battery.charge = Battery.capacity;
+                _batteryRenderer = go.GetComponentInChildren<MeshRenderer>(true);
+                _batteryRenderer.material.SetTexture(ShaderPropertyID._MainTex, BTe);
+                _batteryRenderer.material.SetTexture(ShaderPropertyID._Illum, BIl);
 
-                    Renderer = go.GetComponentInChildren<MeshRenderer>(true);
-                    Renderer.material.SetTexture(ShaderPropertyID._MainTex, B_TE);
-                    Renderer.material.SetTexture(ShaderPropertyID._Illum, B_IL);
+                if (wasActive) go.SetActive(true);
+            }
+        };
 
-                    if (wasActive) go.SetActive(true);
-                }
-            };
+        _nuclearBatteryPrefab.SetGameObject(_nuclearBatteryClone);
 
-            Recipe = new()
+        RecipeData recipe = new()
+        {
+            craftAmount = 1,
+            Ingredients =
             {
-                craftAmount = 1,
-                Ingredients =
-                        {
-                            new Ingredient(TechType.Battery, 2),
-                            new Ingredient(TechType.UraniniteCrystal, 2),
-                            new Ingredient(TechType.Quartz, 2),
-                        },
-            };
+                new Ingredient(TechType.Battery),
+                new Ingredient(TechType.UraniniteCrystal, 2),
+                new Ingredient(TechType.ReactorRod)
+            }
+        };
 
-            _ = NuclearBattery.SetRecipe(Recipe)
-                .WithFabricatorType(CraftTree.Type.Fabricator)
-                .WithStepsToFabricatorTab("Resources", "Electronics")
-                .WithCraftingTime(1f);
+        _ = _nuclearBatteryPrefab.SetRecipe(recipe)
+            .WithFabricatorType(CraftTree.Type.Fabricator)
+            .WithStepsToFabricatorTab("Resources", "Electronics")
+            .WithCraftingTime(1f);
 
-            _ = NuclearBattery.SetUnlock(TechType.UraniniteCrystal);
+        _ = _nuclearBatteryPrefab.SetUnlock(TechType.Battery);
 
-            _ = NuclearBattery.SetEquipment(EquipmentType.BatteryCharger);
+        _ = _nuclearBatteryPrefab.SetEquipment(EquipmentType.BatteryCharger);
 
-            _ = NuclearBattery.SetPdaGroupCategory(TechGroup.Resources, TechCategory.Electronics);
+        _ = _nuclearBatteryPrefab.SetPdaGroupCategory(TechGroup.Resources, TechCategory.Electronics);
 
-            NuclearBattery.SetGameObject(NuclearBatteryClone);
-
-            NuclearBattery.Register();
-        }
+        _nuclearBatteryPrefab.Register();
     }
+
+    #region[Declarations]
+
+    private const string ClassId = "NuclearBattery",
+        DisplayName = "My Nuclear Battery",
+        Description = "A Nuclear powerful battery!",
+        Language = "English";
+
+    private const bool UnlockAtStart = false;
+
+    private const float NuclearPowerBattery = 10000f;
+
+    //
+    public static PrefabInfo Info;
+    private static CustomPrefab _nuclearBatteryPrefab;
+    private static PrefabTemplate _nuclearBatteryClone;
+    private static Battery _battery;
+    private static Renderer _batteryRenderer;
+
+    #endregion
 }

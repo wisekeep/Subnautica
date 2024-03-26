@@ -1,4 +1,6 @@
 ﻿
+using MySeamothModules.Items.Equipment.DepthModules;
+
 namespace MySeamothModules
 {
     [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)]

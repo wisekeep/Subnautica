@@ -4,17 +4,17 @@ namespace SeamothModules.Items.Equipment.DepthModules
     public class SeamothMK4
     {
         #region[Declarations]
-        public const string classId = "SeamothDepthModuleMK4",
-                            displayName = "Seamoth Depth Module MK4",
-                            description = "Enhances safe diving depth by 1100m. Does not stack.",
-                            language = "English";
-        public const bool unlockAtStart = true;
-        public static bool wasActive;
+        private const string ClassId = "SeamothDepthModuleMK4",
+                             DisplayName = "Seamoth Depth Module MK4",
+                             Description = "Enhances safe diving depth by 1100m. Does not stack.",
+                             Language = "English";
+        private const bool UnlockAtStart = true;
+        private static bool _wasActive;
         #endregion
 
         #region[Prefab Declarations]
         public static PrefabInfo Info { get; private set; } = PrefabInfo
-            .WithTechType(classId, displayName, description, language, unlockAtStart, null)
+            .WithTechType(ClassId, DisplayName, Description, Language, UnlockAtStart, null)
             .WithIcon(SpriteManager.Get(TechType.VehicleHullModule3))
             .WithSizeInInventory(new Vector2int(1, 1));
         public static TechType TechType { get; private set; }
@@ -33,12 +33,12 @@ namespace SeamothModules.Items.Equipment.DepthModules
             {
                 ModifyPrefab = go =>
                 {
-                    wasActive = go.activeSelf;
-                    if (wasActive) go.SetActive(false);
+                    _wasActive = go.activeSelf;
+                    if (_wasActive) go.SetActive(false);
 
                     //
 
-                    if (wasActive) go.SetActive(true);
+                    if (_wasActive) go.SetActive(true);
                 }
             };
 

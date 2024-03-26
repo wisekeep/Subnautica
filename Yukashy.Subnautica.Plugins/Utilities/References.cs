@@ -8,11 +8,8 @@ global using BepInEx;
 global using BepInEx.Logging;
 //global using BepInEx.Configuration;
 global using BepInEx.AssemblyPublicizer;
-
 /*      Harmony      */
-
 global using HarmonyLib;
-
 /*       Nautilus    */
 global using Nautilus;
 global using Nautilus.Utility;
@@ -34,7 +31,6 @@ global using Nautilus.Commands;
 global using Nautilus.Assets;
 global using Nautilus.Assets.PrefabTemplates;
 global using Nautilus.Assets.Gadgets;
-
 /*       System      */
 global using System;
 global using System.Text;
@@ -50,7 +46,6 @@ global using System.Resources;
 global using System.Diagnostics;
 global using System.Collections;
 global using System.Collections.Generic;
-
 /*       Unity       */
 global using UnityEngineInternal;
 global using UnityEngine;
@@ -64,7 +59,6 @@ global using UnityEngine.AddressableAssets;
 global using UnityEngine.Rendering;
 //global using Unity.Properties;
 global using Unity;
-
 /*        Other      */
 global using UWE;
 global using TMPro;
