@@ -7,8 +7,8 @@ using PluginInfo = Nautilus.PluginInfo;
 namespace NuclearBatteries;
 
 [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)]
-[BepInDependency(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_VERSION)]
-[BepInDependency("com.snmodding.nautilus")]
+//[BepInDependency(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_VERSION)]
+[BepInDependency("com.snmodding.nautilus", BepInDependency.DependencyFlags.HardDependency)]
 [BepInIncompatibility("com.ahk1221.smlhelper")]
 [BepInProcess("Subnautica.exe")]
 public class Plugin : BaseUnityPlugin

@@ -6,8 +6,9 @@ using SeamothModules.Items.Equipment.DepthModules;
 namespace SeamothModules
 {
     [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)]
-    [BepInDependency(Nautilus.PluginInfo.PLUGIN_GUID, Nautilus.PluginInfo.PLUGIN_VERSION)]
-    //[BepInDependency("com.snmodding.nautilus", BepInDependency.DependencyFlags.HardDependency)]
+    //[BepInDependency(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_VERSION)]
+    [BepInDependency("com.snmodding.nautilus", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInIncompatibility("com.ahk1221.smlhelper")]
     [BepInProcess("Subnautica.exe")]
     public class Plugin : BaseUnityPlugin
     {
